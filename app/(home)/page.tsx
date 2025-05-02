@@ -11,11 +11,8 @@ import {
 import data from "@/lib/data";
 import { toSlug } from "@/lib/utils";
 
-export default async function HomePage() {
+export default async function Page() {
   const categories = (await getAllCategories()).slice(0, 4);
-  const todaysDeals = await getProductsByTag({ tag: "todays-deal" });
-  const bestSellingProducts = await getProductsByTag({ tag: "best-seller" });
-
   const newArrivals = await getProductsForCard({
     tag: "new-arrival",
     limit: 4,
@@ -67,37 +64,21 @@ export default async function HomePage() {
     },
   ];
 
-  // const carouselItems = [
-  //   {
-  //     image: "/images/carousel/carousel1.jpg",
-  //     url: "/search?category=electronics",
-  //     title: "Electronics",
-  //     buttonCaption: "Shop Now"
-  //   },
-  //   {
-  //     image: "/images/carousel/carousel2.jpg",
-  //     url: "/search?category=fashion",
-  //     title: "Fashion",
-  //     buttonCaption: "Explore"
-  //   },
-  //   {
-  //     image: "/images/carousel/carousel3.jpg",
-  //     url: "/search?category=home",
-  //     title: "Home & Kitchen",
-  //     buttonCaption: "Discover"
-  //   }
-  // ];
+  const todaysDeals = await getProductsByTag({ tag: "todays-deal" });
+  const bestSellingProducts = await getProductsByTag({ tag: "best-seller" });
 
   return (
     <>
       <HomeCarousel items={data.carousels} />
       <div className="md:p-4 md:space-y-4 bg-border">
         <HomeCard cards={cards} />
+
         <Card className="w-full rounded-none">
           <CardContent className="p-4 items-center gap-3">
             <ProductSlider title={"Today's Deals"} products={todaysDeals} />
           </CardContent>
         </Card>
+
         <Card className="w-full rounded-none">
           <CardContent className="p-4 items-center gap-3">
             <ProductSlider
