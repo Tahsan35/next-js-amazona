@@ -14,6 +14,7 @@ export default async function HomePage() {
   const categories = (await getAllCategories()).slice(0, 4);
   const todaysDeals = await getProductsByTag({ tag: "todays-deal" });
   const bestSellingProducts = await getProductsByTag({ tag: "best-seller" });
+
   const newArrivals = await getProductsForCard({
     tag: "new-arrival",
     limit: 4,
