@@ -1,5 +1,6 @@
 import { ShoppingCartIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
+import CartButton from "./cart-button";
 
 export default function Menu() {
   return (
@@ -16,6 +17,7 @@ export default function Menu() {
             Cart
           </div>
         </Link>
+        <CartButton />
       </nav>
     </div>
   );

@@ -1,5 +1,10 @@
-//export type IProductInput = z.infer<typeof ProductInputSchema>;
-import { ProductInputSchema } from "@/lib/validator";
+import {
+  CartSchema,
+  OrderItemSchema,
+  ProductInputSchema,
+} from "@/lib/validator";
+export type OrderItem = z.infer<typeof OrderItemSchema>;
+export type Cart = z.infer<typeof CartSchema>;
 import { z } from "zod";
 
 export type IProductInput = z.infer<typeof ProductInputSchema>;
