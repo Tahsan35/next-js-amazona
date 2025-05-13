@@ -76,6 +76,14 @@ export const UserSignInSchema = z.object({
   password: Password,
 });
 
+export const UserSignUpSchema = UserSignInSchema.extend({
+  name: UserName,
+  confirmPassword: Password,
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
+});
+
 // Order Item
 export const OrderItemSchema = z.object({
   clientId: z.string().min(1, "clientId is required"),
