@@ -83,6 +83,15 @@ export const UserSignUpSchema = UserSignInSchema.extend({
   message: "Passwords don't match",
   path: ["confirmPassword"],
 });
+export const ShippingAddressSchema = z.object({
+  fullName: z.string().min(1, "Full name is required"),
+  street: z.string().min(1, "Address is required"),
+  city: z.string().min(1, "City is required"),
+  postalCode: z.string().min(1, "Postal code is required"),
+  province: z.string().min(1, "Province is required"),
+  phone: z.string().min(1, "Phone number is required"),
+  country: z.string().min(1, "Country is required"),
+});
 
 // Order Item
 export const OrderItemSchema = z.object({
@@ -117,4 +126,8 @@ export const CartSchema = z.object({
   paymentMethod: z.optional(z.string()),
   deliveryDateIndex: z.optional(z.number()),
   expectedDeliveryDate: z.optional(z.date()),
+  shippingAddress: z.optional(ShippingAddressSchema),
 });
+// export const CartSchema = z.object({
+//   shippingAddress: z.optional(ShippingAddressSchema),
+// });

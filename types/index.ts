@@ -2,6 +2,7 @@ import {
   CartSchema,
   OrderItemSchema,
   ProductInputSchema,
+  ShippingAddressSchema,
   UserInputSchema,
   UserSignInSchema,
   UserSignUpSchema,
@@ -32,3 +33,5 @@ export type IUserSignUp = z.infer<typeof UserSignUpSchema>;
 export type IProductInput = z.infer<typeof ProductInputSchema>;
 export type OrderItem = z.infer<typeof OrderItemSchema>;
 export type Cart = z.infer<typeof CartSchema>;
+// shipping address
+export type ShippingAddress = z.infer<typeof ShippingAddressSchema>;
