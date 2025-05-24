@@ -16,11 +16,12 @@ import { useForm } from "react-hook-form";
 import { IUserSignIn } from "@/types";
 import { signInWithCredentials } from "@/lib/actions/user.actions";
 
-import { toast } from "@/hooks/use-toast";
+import { useToast } from "@/hooks/use-toast"; // Changed this line
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserSignInSchema } from "@/lib/validator";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
-import { APP_NAME } from "@/lib/constants";
+//import { APP_NAME } from "@/lib/constants";
+import useSettingStore from "@/hooks/use-setting-store";
 
 const signInDefaultValues =
   process.env.NODE_ENV === "development"
@@ -34,8 +35,12 @@ const signInDefaultValues =
       };
 
 export default function CredentialsSignInForm() {
+  const {
+    setting: { site },
+  } = useSettingStore();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl") || "/";
+  const { toast } = useToast(); // Added this line
 
   const form = useForm<IUserSignIn>({
     resolver: zodResolver(UserSignInSchema),
@@ -56,6 +61,7 @@ export default function CredentialsSignInForm() {
         throw error;
       }
       toast({
+        // This should now work correctly
         title: "Error",
         description: "Invalid email or password",
         variant: "destructive",
@@ -104,7 +110,7 @@ export default function CredentialsSignInForm() {
             <Button type="submit">Sign In</Button>
           </div>
           <div className="text-sm">
-            By signing in, you agree to {APP_NAME}&apos;s{" "}
+            By signing in, you agree to {site.name}&apos;s{" "}
             <Link href="/page/conditions-of-use">Conditions of Use</Link> and{" "}
             <Link href="/page/privacy-policy">Privacy Notice.</Link>
           </div>

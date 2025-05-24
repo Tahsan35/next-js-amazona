@@ -1,4 +1,4 @@
-import { z } from "zod/v4";
+import { z } from "zod";
 import { formatNumberWithDecimal } from "./utils";
 
 // Common
@@ -188,6 +188,10 @@ export const UserSignUpSchema = UserSignInSchema.extend({
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Passwords don't match",
   path: ["confirmPassword"],
+});
+
+export const UserNameSchema = z.object({
+  name: UserName,
 });
 
 // export const CartSchema = z.object({
